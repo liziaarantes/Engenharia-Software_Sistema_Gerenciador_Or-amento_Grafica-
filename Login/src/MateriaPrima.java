@@ -308,11 +308,11 @@ public class MateriaPrima extends javax.swing.JDialog {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        //captura os dados digitados;F
+        //captura os dados digitados
         int qtd = Integer.parseInt(txtqtd.getText());
         String nome = txtnome.getText();
 
-        String sql = "insert into materiaprima values (?, ?) ";
+        String sql = "insert into materiaprima values (?, ?, ?, ?)";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -321,7 +321,9 @@ public class MateriaPrima extends javax.swing.JDialog {
 
             comando.setString(1, nome);
             comando.setInt(2, qtd);
-
+            comando.setString(3, "2018-09-25");
+            comando.setString(4, "cod_Usuario");
+            
             comando.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Matéria-prima cadastrado com sucesso!");
@@ -340,7 +342,7 @@ public class MateriaPrima extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        String sql = "select * from materiaprima order by nome";
+        String sql = "select * from materiaprima order by materiaPrima";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -362,9 +364,9 @@ public class MateriaPrima extends javax.swing.JDialog {
 
             while (resultado.next()) {
                 Object[] linha = new Object[]{
-                    resultado.getInt("id"),
+                    resultado.getInt("cod_MateriaPrima"),
                     resultado.getString("nome"),
-                    resultado.getInt("qtd"),};
+                    resultado.getInt("qtdEstoque"),};
 
                 modelo.addRow(linha);
             }
@@ -384,7 +386,7 @@ public class MateriaPrima extends javax.swing.JDialog {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int id = Integer.parseInt(txtID.getText());
 
-        String sql = "delete materiaprima where id=?";
+        String sql = "delete materiaprima where cod_MateriaPrima=?";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -414,7 +416,7 @@ public class MateriaPrima extends javax.swing.JDialog {
         int id = Integer.parseInt(txtID.getText());
         String nome = txtnome.getText();
 
-        String sql = "update materiaprima set nome=?, qtd=?,where id=?";
+        String sql = "update materiaprima set nome=?, qtdEstoque=?,where cod_MateriaPrima=?";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);

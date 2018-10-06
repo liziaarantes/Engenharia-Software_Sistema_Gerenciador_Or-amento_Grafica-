@@ -26,7 +26,7 @@ public class Materiais extends javax.swing.JFrame {
 
     String usuario = "root";
     String senha = "";
-    String url = "jdbc:mysql://127.0.0.1:3306/exercicio_11_05";
+    String url = "jdbc:mysql://127.0.0.1:3306/grafica";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,21 +39,21 @@ public class Materiais extends javax.swing.JFrame {
 
         lblID = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
-        lblDtCadastro = new javax.swing.JLabel();
+        lblDtCad = new javax.swing.JLabel();
         txtDtCad = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        lblValor = new javax.swing.JLabel();
+        lblVal = new javax.swing.JLabel();
         txtVal = new javax.swing.JTextField();
-        lblDescrição = new javax.swing.JLabel();
-        txtDescrição = new javax.swing.JTextField();
         lblMateriaPrima = new javax.swing.JLabel();
         jcbMateriaPrima = new javax.swing.JComboBox<>();
-        sPedido = new javax.swing.JScrollPane();
+        lblDescrição = new javax.swing.JLabel();
+        txtDescrição = new javax.swing.JTextField();
+        jspMateriais = new javax.swing.JScrollPane();
         tblMateriais = new javax.swing.JTable();
         btnConsultar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnCadSer = new javax.swing.JToggleButton();
+        btnCadastrar = new javax.swing.JToggleButton();
         btnLimpar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
@@ -69,33 +69,42 @@ public class Materiais extends javax.swing.JFrame {
         getContentPane().add(lblID);
         lblID.setBounds(20, 120, 12, 15);
         getContentPane().add(txtID);
-        txtID.setBounds(110, 120, 430, 20);
+        txtID.setBounds(110, 120, 430, 30);
 
-        lblDtCadastro.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblDtCadastro.setText("Data Cadastro");
-        getContentPane().add(lblDtCadastro);
-        lblDtCadastro.setBounds(570, 120, 90, 15);
+        lblDtCad.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblDtCad.setText("Data Cadastro");
+        getContentPane().add(lblDtCad);
+        lblDtCad.setBounds(570, 120, 90, 15);
         getContentPane().add(txtDtCad);
-        txtDtCad.setBounds(660, 120, 460, 20);
+        txtDtCad.setBounds(660, 120, 460, 30);
 
         lblNome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblNome.setText("Nome Material");
         getContentPane().add(lblNome);
-        lblNome.setBounds(20, 160, 80, 15);
+        lblNome.setBounds(20, 170, 80, 15);
         getContentPane().add(txtNome);
-        txtNome.setBounds(110, 160, 1010, 20);
+        txtNome.setBounds(110, 170, 1010, 30);
 
-        lblValor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblValor.setText("Valor M²");
-        getContentPane().add(lblValor);
-        lblValor.setBounds(20, 200, 70, 15);
+        lblVal.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblVal.setText("Valor M²");
+        getContentPane().add(lblVal);
+        lblVal.setBounds(20, 220, 70, 15);
         getContentPane().add(txtVal);
-        txtVal.setBounds(110, 200, 430, 20);
+        txtVal.setBounds(110, 220, 430, 30);
+
+        lblMateriaPrima.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblMateriaPrima.setText("Matéria Prima");
+        getContentPane().add(lblMateriaPrima);
+        lblMateriaPrima.setBounds(570, 220, 80, 15);
+
+        jcbMateriaPrima.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adesivo", "Lona", "Papel", "Adesivo Recorte" }));
+        getContentPane().add(jcbMateriaPrima);
+        jcbMateriaPrima.setBounds(660, 220, 150, 30);
 
         lblDescrição.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblDescrição.setText("Descrição");
         getContentPane().add(lblDescrição);
-        lblDescrição.setBounds(20, 240, 56, 15);
+        lblDescrição.setBounds(20, 270, 56, 15);
 
         txtDescrição.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,27 +112,18 @@ public class Materiais extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtDescrição);
-        txtDescrição.setBounds(110, 240, 1010, 100);
-
-        lblMateriaPrima.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblMateriaPrima.setText("Matéria Prima:");
-        getContentPane().add(lblMateriaPrima);
-        lblMateriaPrima.setBounds(570, 200, 80, 15);
-
-        jcbMateriaPrima.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adesivo", "Lona", "Papel", "Adesivo Recorte" }));
-        getContentPane().add(jcbMateriaPrima);
-        jcbMateriaPrima.setBounds(660, 200, 120, 20);
+        txtDescrição.setBounds(110, 270, 1010, 100);
 
         tblMateriais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Data Serviço", "Valor Serviço", "Nome Cliente", "CPF Cliente"
+                "ID", "Nome Material", "Valor M²", "Matéria Prima"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -137,13 +137,13 @@ public class Materiais extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        sPedido.setViewportView(tblMateriais);
+        jspMateriais.setViewportView(tblMateriais);
 
-        getContentPane().add(sPedido);
-        sPedido.setBounds(20, 360, 1110, 300);
+        getContentPane().add(jspMateriais);
+        jspMateriais.setBounds(20, 390, 1110, 270);
 
         btnConsultar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnConsultar.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\ExercicioAula13_04\\src\\Consultar_Cliente.png")); // NOI18N
+        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Consultar_Materiais.png"))); // NOI18N
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarActionPerformed(evt);
@@ -162,14 +162,14 @@ public class Materiais extends javax.swing.JFrame {
         getContentPane().add(btnEditar);
         btnEditar.setBounds(100, 10, 80, 80);
 
-        btnCadSer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Cadastrar_Servicos.png"))); // NOI18N
-        btnCadSer.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Cadastrar_Servicos.png"))); // NOI18N
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadSerActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCadSer);
-        btnCadSer.setBounds(190, 10, 80, 80);
+        getContentPane().add(btnCadastrar);
+        btnCadastrar.setBounds(190, 10, 80, 80);
 
         btnLimpar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Limpar_Cliente.png"))); // NOI18N
@@ -204,39 +204,55 @@ public class Materiais extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadSerActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
 
-        String dt = txtDtCad.getText();
+        String datacadastro = txtDtCad.getText();
         String nome = txtNome.getText();
-        String cpf = txtDescrição.getText();
-        Double val = Double.parseDouble(txtVal.getText());
+        Double precom2 = Double.parseDouble(txtVal.getText());
+        int MateriaPrima_cod_MateriaPrima = 1;
+        String descricao = txtDescrição.getText();
+        
+            String sql = "insert into usuario values (?, ?, ?, ?, ?) ";
 
-        DefaultTableModel pedido = (DefaultTableModel) tblMateriais.getModel();
+        try {
+            Connection conexao = DriverManager.getConnection(url, usuario, senha);
 
-        Object[] ped = new Object[5];
+            PreparedStatement comando = conexao.prepareStatement(sql);
 
-        ped[0] = dt;
-        ped[1] = val;
-        ped[2] = nome;
-        ped[3] = cpf;
+            comando.setInt(1, MateriaPrima_cod_MateriaPrima);
+            comando.setString(2, descricao);
+            comando.setString(3, nome);
+            comando.setString(4, datacadastro);
+            comando.setDouble(5, precom2);
 
-        pedido.addRow(ped);
+            
+            comando.executeUpdate();
 
-        JOptionPane.showMessageDialog(null, "Pedido Cadastrado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Material cadastrado com sucesso!");
+
+            comando.close();
+            conexao.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro na inserção dos dados cadastrais do material");
+        }
 
         txtDtCad.setText(null);
         txtNome.setText(null);
-        txtDescrição.setText(null);
         txtVal.setText(null);
-    }//GEN-LAST:event_btnCadSerActionPerformed
+      // Material(null);
+        txtDescrição.setText(null);
+        
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int id = Integer.parseInt(txtId.getText());
+        int id = Integer.parseInt(txtID.getText());
 
         String sql = "delete material where id=?";
 
@@ -249,14 +265,14 @@ public class Materiais extends javax.swing.JFrame {
 
             comando.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Material removido com sucesso!");
 
             comando.close();
             conexao.close();
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro na remoção dos dados do usuário");
+            JOptionPane.showMessageDialog(null, "Erro na remoção dos dados do material");
         }
 
         txtDtCad.setText(null);
@@ -289,10 +305,16 @@ public class Materiais extends javax.swing.JFrame {
             while (resultado.next()) {
                 Object[] linha = new Object[]{
                     resultado.getInt("ID"),
-                    resultado.getString("DtCad"),
-                    resultado.getString("Nome"),
-                    resultado.getString("Val"),
-                    resultado.getString("tipoServico"),};
+                    resultado.getString("dt_cadastro"),
+                    resultado.getString("nome_material"),
+                    resultado.getString("valor"),
+                    resultado.getString("mat_prima"),
+                    resultado.getString("descricao")
+                        
+                };
+                
+               
+        
 
                 modelo.addRow(linha);
             }
@@ -300,7 +322,7 @@ public class Materiais extends javax.swing.JFrame {
             txtDtCad.setText(null);
             txtNome.setText(null);
             txtVal.setText(null);
-            jcbMateriaPrima.null);
+            jcbMateriaPrima.setSelectedIndex(0);
             txtDescrição.setText(null);
 
             resultado.close();
@@ -308,7 +330,7 @@ public class Materiais extends javax.swing.JFrame {
             conexao.close();
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro na consulta de dados");
+            JOptionPane.showMessageDialog(null, "Erro na consulta do material");
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnConsultarActionPerformed
 
@@ -359,20 +381,20 @@ public class Materiais extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnCadSer;
+    private javax.swing.JToggleButton btnCadastrar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> jcbMateriaPrima;
+    private javax.swing.JScrollPane jspMateriais;
     private javax.swing.JLabel lblDescrição;
-    private javax.swing.JLabel lblDtCadastro;
+    private javax.swing.JLabel lblDtCad;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblMateriaPrima;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblValor;
-    private javax.swing.JScrollPane sPedido;
+    private javax.swing.JLabel lblVal;
     private javax.swing.JTable tblMateriais;
     private javax.swing.JLabel txt;
     private javax.swing.JTextField txtDescrição;

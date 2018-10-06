@@ -1,3 +1,4 @@
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -5,21 +6,19 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author Aluno
  */
 public class Usuario extends javax.swing.JFrame {
 
-       public Usuario() {
+    public Usuario() {
         initComponents();
     }
     String usuario = "root";
     String senha = "";
-    String url = "jdbc:mysql://127.0.0.1:3306/exercicio_11_05";
+    String url = "jdbc:mysql://127.0.0.1:3306/grafica";
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,23 +74,22 @@ public class Usuario extends javax.swing.JFrame {
         lblId.setBounds(20, 120, 12, 15);
 
         txtId.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtId.setEnabled(false);
         getContentPane().add(txtId);
-        txtId.setBounds(70, 120, 790, 21);
+        txtId.setBounds(70, 120, 310, 30);
 
         lblNome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblNome.setText("Nome");
         getContentPane().add(lblNome);
-        lblNome.setBounds(20, 160, 34, 15);
+        lblNome.setBounds(20, 170, 34, 15);
 
         txtNome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         getContentPane().add(txtNome);
-        txtNome.setBounds(70, 160, 790, 21);
+        txtNome.setBounds(70, 170, 790, 30);
 
         lblCpf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblCpf.setText("CPF");
         getContentPane().add(lblCpf);
-        lblCpf.setBounds(20, 240, 24, 15);
+        lblCpf.setBounds(490, 120, 24, 15);
 
         txtCpf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtCpf.addActionListener(new java.awt.event.ActionListener() {
@@ -100,32 +98,32 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtCpf);
-        txtCpf.setBounds(70, 240, 320, 21);
+        txtCpf.setBounds(540, 120, 320, 30);
 
         lblEmail.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblEmail.setText("Email");
         getContentPane().add(lblEmail);
-        lblEmail.setBounds(20, 200, 32, 15);
+        lblEmail.setBounds(20, 220, 32, 15);
 
         txtEmail.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         getContentPane().add(txtEmail);
-        txtEmail.setBounds(70, 200, 790, 21);
+        txtEmail.setBounds(70, 220, 790, 30);
 
         lblSen.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblSen.setText("Senha");
         getContentPane().add(lblSen);
-        lblSen.setBounds(20, 280, 36, 15);
+        lblSen.setBounds(20, 270, 36, 15);
 
         txtSen.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         getContentPane().add(txtSen);
-        txtSen.setBounds(70, 280, 320, 21);
+        txtSen.setBounds(70, 270, 320, 30);
 
         lblSenCon.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblSenCon.setText("Confirmar Senha");
         getContentPane().add(lblSenCon);
-        lblSenCon.setBounds(420, 280, 94, 15);
+        lblSenCon.setBounds(420, 270, 94, 15);
         getContentPane().add(txtSenCon);
-        txtSenCon.setBounds(539, 280, 320, 20);
+        txtSenCon.setBounds(540, 270, 320, 30);
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setOpaque(false);
@@ -188,7 +186,7 @@ public class Usuario extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblUsuario);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(20, 323, 1110, 340);
+        jScrollPane2.setBounds(20, 333, 1110, 330);
 
         btnConsultar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnConsultar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Consultar_Cliente.png"))); // NOI18N
@@ -259,50 +257,7 @@ public class Usuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-        int id = Integer.parseInt(txtId.getText());
-        String Email = txtEmail.getText();
-        String cpf = txtCpf.getText();
-        String Id = txtId.getText();
-        String sen = txtSen.getText();
-        String nome = txtNome.getText();
-        String senCon = txtSenCon.getText();
-
-        String sql = "update cliente set nome=?, email=?,cpf=?, endereco=?, telefone=?, celular=? where id=?";
-
-        try {
-            Connection conexao = DriverManager.getConnection(url, usuario, senha);
-
-            PreparedStatement comando = conexao.prepareStatement(sql);
-
-            comando.setString(1, nome);
-            comando.setString(2, Email);
-            comando.setString(3, cpf);
-            comando.setString(4, Id);
-            comando.setString(5, sen);
-            comando.setString(6, senCon);
-
-            comando.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
-
-            comando.close();
-            conexao.close();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao editar dos dados de cadastro do usuário");
-        }
-
-        txtId.setText(null);
-        txtCpf.setText(null);
-        txtSen.setText(null);
-        txtEmail.setText(null);
-        txtNome.setText(null);
-        txtSenCon.setText(null);
-    }//GEN-LAST:event_btnEditar1ActionPerformed
-
-    private void btnAdicionar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionar1ActionPerformed
-        //captura os dados digitados;
+        int cod_Usuario = Integer.parseInt(txtId.getText());
         String Email = txtEmail.getText();
         String cpf = txtCpf.getText();
         String sen = txtSen.getText();
@@ -320,7 +275,7 @@ public class Usuario extends javax.swing.JFrame {
             }
         }
 
-        String sql = "insert into carro values (?, ?, ?, ?, ?) ";
+        String sql = "update usuario set nome=?, email=?,cpf=?, senha=?, tipo_Usuário=?  where cod_Usuario=?";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -332,6 +287,61 @@ public class Usuario extends javax.swing.JFrame {
             comando.setString(3, cpf);
             comando.setString(4, sen);
             comando.setInt(5, tipo);
+            comando.setInt(6, cod_Usuario);
+
+            comando.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso!");
+
+            comando.close();
+            conexao.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao editar dos dados de cadastro do usuário");
+        }
+
+        txtSenCon.setText(null);
+        txtCpf.setText(null);
+        txtSen.setText(null);
+        txtEmail.setText(null);
+        txtNome.setText(null);
+        radAten.setText(null);
+        radAdmin.setText(null);
+    }//GEN-LAST:event_btnEditar1ActionPerformed
+
+    private void btnAdicionar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionar1ActionPerformed
+        //captura os dados digitados;
+        String Email = txtEmail.getText();
+        String cpf = txtCpf.getText();
+        String sen = txtSen.getText();
+        String senCon = txtSenCon.getText();
+        String nome = txtNome.getText();
+        String tipo = "admin";
+        boolean aten = radAten.isSelected();
+        boolean admin = radAdmin.isSelected();
+
+        if (aten == true) {
+            tipo = "Atendente";
+        } else {
+            if (admin == true) {
+                tipo = "Admin";
+            }
+        }
+
+        String sql = "insert into usuario (nome, cpf, email, tipo_Usuário, senha, ativo) values ( ?, ?, ?, ?, ?, ?) ";
+
+        try {
+            Connection conexao = DriverManager.getConnection(url, usuario, senha);
+
+            PreparedStatement comando = conexao.prepareStatement(sql);
+
+            comando.setString(1, nome);
+            comando.setString(3, Email);
+            comando.setString(2, cpf);
+            comando.setString(5, sen);
+            comando.setString(4, tipo);
+            comando.setInt(6, 1);
 
             comando.executeUpdate();
 
@@ -350,25 +360,25 @@ public class Usuario extends javax.swing.JFrame {
         txtSen.setText(null);
         txtEmail.setText(null);
         txtNome.setText(null);
-        radAten.setText(null);
-        radAdmin.setText(null);
+//        radAten.setText(null);
+//        radAdmin.setText(null);
     }//GEN-LAST:event_btnAdicionar1ActionPerformed
 
     private void btnExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluir1ActionPerformed
-               int id = Integer.parseInt(txtId.getText());
+        int cod_Usuario = Integer.parseInt(txtId.getText());
 
-        String sql = "delete usuario where id=?";
+        String sql = "delete FROM usuario where cod_Usuario=?";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
 
             PreparedStatement comando = conexao.prepareStatement(sql);
 
-            comando.setInt(1, id);
+            comando.setInt(1, cod_Usuario);
 
             comando.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Usuário removido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Usuário removcod_Usuarioo com sucesso!");
 
             comando.close();
             conexao.close();
@@ -385,7 +395,6 @@ public class Usuario extends javax.swing.JFrame {
         txtNome.setText(null);
         radAten.setText(null);
         radAdmin.setText(null);
-
     }//GEN-LAST:event_btnExcluir1ActionPerformed
 
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
@@ -415,12 +424,12 @@ public class Usuario extends javax.swing.JFrame {
 
             while (resultado.next()) {
                 Object[] linha = new Object[]{
-                    resultado.getInt("id"),
+                    resultado.getInt("cod_Usuario"),
                     resultado.getString("nome"),
                     resultado.getString("email"),
                     resultado.getString("cpf"),
                     resultado.getString("senha"),
-                    resultado.getString("tipoUsuario")
+                    resultado.getString("tipo_Usuário")
                 };
 
                 modelo.addRow(linha);
@@ -439,10 +448,11 @@ public class Usuario extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro na consulta de dados");
+        }
     }//GEN-LAST:event_btnConsultar1ActionPerformed
 
     private void btnLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpar1ActionPerformed
-        
+
         txtSenCon.setText(null);
         txtCpf.setText(null);
         txtSen.setText(null);
@@ -454,7 +464,14 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpar1ActionPerformed
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
-        // TODO add your handling code here:
+        txtSenCon.setText(null);
+        txtCpf.setText(null);
+        txtSen.setText(null);
+        txtEmail.setText(null);
+        txtNome.setText(null);
+        txtId.setText(null);
+        radAten.setText(null);
+        radAdmin.setText(null);
     }//GEN-LAST:event_txtCpfActionPerformed
 
     /**

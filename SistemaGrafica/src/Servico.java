@@ -26,7 +26,7 @@ public class Servico extends javax.swing.JFrame {
 
     String usuario = "root";
     String senha = "";
-    String url = "jdbc:mysql://127.0.0.1:3306/exercicio_11_05";
+    String url = "jdbc:mysql://127.0.0.1:3306/grafica";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,14 +142,14 @@ public class Servico extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Descrição", "Valor", "Tipo Serviço"
+                "ID", "Descrição", "Valor", "Nome"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -207,6 +207,11 @@ public class Servico extends javax.swing.JFrame {
 
         btnExcluir.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Excluir_Servicos.png"))); // NOI18N
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnExcluir);
         btnExcluir.setBounds(370, 10, 80, 80);
 
@@ -229,8 +234,8 @@ public class Servico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        int id = Integer.parseInt(txtId.getText());
-        Double valor = Double.parseDouble(txtValor.getText());
+        int cod_Servico = Integer.parseInt(txtId.getText());
+        Double taxa = Double.parseDouble(txtValor.getText());
         String desc = txtDesc.getText();
         String nome = txtNome.getText();
         int tipo = 0;
@@ -245,7 +250,7 @@ public class Servico extends javax.swing.JFrame {
             }
         }
 
-        String sql = "update cliente set nome=?, descricao=?,valor=?, tipoServico=? where id=?";
+        String sql = "update servico set nome=?, descricao=?,taxa=? where cod_Servico=?";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -254,9 +259,9 @@ public class Servico extends javax.swing.JFrame {
 
             comando.setString(1, nome);
             comando.setString(2, desc);
-            comando.setDouble(3, valor);
-            comando.setInt(4, tipo);
-            comando.setInt(5, id);
+            comando.setDouble(3, taxa);
+        
+            comando.setInt(4, cod_Servico);
 
             comando.executeUpdate();
 
@@ -279,7 +284,7 @@ public class Servico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        String sql = "select * from cliente order by nome";
+        String sql = "select * from servico order by nome";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -301,16 +306,14 @@ public class Servico extends javax.swing.JFrame {
 
             while (resultado.next()) {
                 Object[] linha = new Object[]{
-                    resultado.getInt("id"),
-                    resultado.getString("nome"),
+                    resultado.getInt("cod_Servico"),
                     resultado.getString("descricao"),
-                    resultado.getString("valor"),
-                    resultado.getString("tipoServico"),
+                    resultado.getDouble("taxa"),
+                    resultado.getString("nome")
                 };
 
                 modelo.addRow(linha);
             }
-
             txtValor.setText(null);
             txtDesc.setText(null);
             txtNome.setText(null);
@@ -329,7 +332,7 @@ public class Servico extends javax.swing.JFrame {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         //captura os dados digitados;F
-        Double valor = Double.parseDouble(txtValor.getText());
+        Double taxa = Double.parseDouble(txtValor.getText());
         String desc = txtDesc.getText();
         String nome = txtNome.getText();
         boolean aten = radAten.isSelected();
@@ -343,21 +346,20 @@ public class Servico extends javax.swing.JFrame {
             }
         }
 
-        String sql = "insert into servico values (?, ?, ?, ?) ";
+        String sql = "insert into servico (descricao, taxa, nome) values (?, ?, ?) ";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
 
             PreparedStatement comando = conexao.prepareStatement(sql);
 
-            comando.setString(1, nome);
-            comando.setString(2, desc);
-            comando.setDouble(3, valor);
-            comando.setInt(4, tipo);
+            comando.setString(3, nome);
+            comando.setString(1, desc);
+            comando.setDouble(2, taxa);
 
             comando.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Serviço cadastrado com sucesso!");
 
             comando.close();
             conexao.close();
@@ -387,6 +389,38 @@ public class Servico extends javax.swing.JFrame {
         radAten.setText(null);
         radAdmin.setText(null);
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int cod_Servico = Integer.parseInt(txtId.getText());
+
+        String sql = "delete FROM servico where cod_Servico=?";
+
+        try {
+            Connection conexao = DriverManager.getConnection(url, usuario, senha);
+
+            PreparedStatement comando = conexao.prepareStatement(sql);
+
+            comando.setInt(1, cod_Servico);
+
+            comando.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Serviço removido com sucesso!");
+
+            comando.close();
+            conexao.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro na remoção dos dados do usuário");
+        }
+
+        txtValor.setText(null);
+        txtDesc.setText(null);
+        txtNome.setText(null);
+        txtId.setText(null);
+        radAten.setText(null);
+        radAdmin.setText(null);
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:

@@ -26,7 +26,7 @@ public class MateriaPrima extends javax.swing.JDialog {
     }
     String usuario = "root";
     String senha = "";
-    String url = "jdbc:mysql://127.0.0.1:3306/grafica";
+    String url = "jdbc:mysql://127.0.0.1:3306/exercicio_11_05";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,24 +40,24 @@ public class MateriaPrima extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jlID = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
+        jlNomeMp = new javax.swing.JLabel();
+        txtnome = new javax.swing.JTextField();
+        jlQtd = new javax.swing.JLabel();
+        txtqtd = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         radAten = new javax.swing.JRadioButton();
         radAdmin = new javax.swing.JRadioButton();
-        jPanel3 = new javax.swing.JPanel();
-        btnLimpar = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
-        btnAdicionar = new javax.swing.JButton();
-        btnConsultar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        jlNomeMp = new javax.swing.JLabel();
-        jlQtd = new javax.swing.JLabel();
-        txtnome = new javax.swing.JTextField();
-        txtqtd = new javax.swing.JTextField();
         jspTabela = new javax.swing.JScrollPane();
         jTabela = new javax.swing.JTable();
-        jlID = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
+        btnConsultar = new javax.swing.JButton();
+        btnAdicionar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,15 +73,60 @@ public class MateriaPrima extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro Matéria-Prima");
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Status serviço"));
+        jlID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlID.setText("ID");
+        getContentPane().add(jlID);
+        jlID.setBounds(20, 140, 20, 14);
+
+        txtID.setEditable(false);
+        txtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtID);
+        txtID.setBounds(120, 130, 700, 30);
+
+        jlNomeMp.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlNomeMp.setText("Matéria-Prima");
+        getContentPane().add(jlNomeMp);
+        jlNomeMp.setBounds(20, 180, 90, 14);
+
+        txtnome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtnome);
+        txtnome.setBounds(120, 170, 700, 30);
+
+        jlQtd.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlQtd.setText("Quantidade");
+        getContentPane().add(jlQtd);
+        jlQtd.setBounds(20, 220, 70, 14);
+        getContentPane().add(txtqtd);
+        txtqtd.setBounds(120, 210, 700, 30);
+
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setOpaque(false);
 
         radAten.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         radAten.setSelected(true);
         radAten.setText("Ativo");
+        radAten.setOpaque(false);
 
         radAdmin.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         radAdmin.setText("Inativo");
+        radAdmin.setOpaque(false);
+        radAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,128 +137,58 @@ public class MateriaPrima extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(radAdmin)
                     .addComponent(radAten))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(radAten)
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addComponent(radAdmin)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(900, 120, 230, 120);
 
-        btnLimpar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
-            }
-        });
-
-        btnVoltar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-
-        btnAdicionar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnAdicionar.setText("Cadastrar");
-        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarActionPerformed(evt);
-            }
-        });
-
-        btnConsultar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnConsultar.setText("Consultar");
-        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarActionPerformed(evt);
-            }
-        });
-
-        btnExcluir.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-
-        btnEditar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnAdicionar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                    .addComponent(btnConsultar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConsultar)
-                    .addComponent(btnEditar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnAdicionar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpar)
-                    .addComponent(btnVoltar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jlNomeMp.setText("Matéria - Prima");
-
-        jlQtd.setText("Quantidade");
-
-        txtnome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnomeActionPerformed(evt);
-            }
-        });
-
+        jTabela.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Matéria - Prima", "Quantidade"
+                "ID", "Matéria - Prima", "Quantidade", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -231,71 +206,75 @@ public class MateriaPrima extends javax.swing.JDialog {
         });
         jspTabela.setViewportView(jTabela);
 
-        jlID.setText("ID");
+        getContentPane().add(jspTabela);
+        jspTabela.setBounds(20, 260, 1110, 400);
 
-        txtID.setEditable(false);
-        txtID.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnConsultar.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\Telas\\Fundos_Icones_Materiais\\Consultar_Materiais.png")); // NOI18N
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnConsultar);
+        btnConsultar.setBounds(20, 10, 80, 80);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jspTabela)
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jlID)
-                                        .addGap(79, 79, 79))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jlNomeMp)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlQtd)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtqtd))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(16, 16, 16))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlID)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNomeMp)
-                    .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlQtd)
-                    .addComponent(txtqtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(jspTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
-        );
+        btnAdicionar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnAdicionar.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\Telas\\Fundos_Icones_Materiais\\Cadastrar_Materiais.png")); // NOI18N
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAdicionar);
+        btnAdicionar.setBounds(200, 10, 80, 80);
 
-        pack();
+        btnEditar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\Telas\\Fundos_Icones_Materiais\\Editar_Materiais.png")); // NOI18N
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditar);
+        btnEditar.setBounds(110, 10, 80, 80);
+
+        btnExcluir.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnExcluir.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\Telas\\Fundos_Icones_Materiais\\Excluir_Materiais.png")); // NOI18N
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnExcluir);
+        btnExcluir.setBounds(380, 10, 80, 80);
+
+        btnLimpar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnLimpar.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\Telas\\Fundos_Icones_Materiais\\Limpar_Materiais.png")); // NOI18N
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLimpar);
+        btnLimpar.setBounds(290, 10, 80, 80);
+
+        btnVoltar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\Telas\\Fundos_Icones_Materiais\\Voltar_Materiais.png")); // NOI18N
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVoltar);
+        btnVoltar.setBounds(470, 10, 80, 80);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\Telas\\Fundos_Icones_Materiais\\Fundo_Materiais.png")); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 1200, 690);
+
+        setSize(new java.awt.Dimension(1165, 706));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -308,11 +287,11 @@ public class MateriaPrima extends javax.swing.JDialog {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        //captura os dados digitados
+        //captura os dados digitados;F
         int qtd = Integer.parseInt(txtqtd.getText());
         String nome = txtnome.getText();
 
-        String sql = "insert into materiaprima values (?, ?, ?, ?)";
+        String sql = "insert into materiaprima values (?, ?) ";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -321,9 +300,7 @@ public class MateriaPrima extends javax.swing.JDialog {
 
             comando.setString(1, nome);
             comando.setInt(2, qtd);
-            comando.setString(3, "2018-09-25");
-            comando.setString(4, "cod_Usuario");
-            
+
             comando.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Matéria-prima cadastrado com sucesso!");
@@ -342,7 +319,7 @@ public class MateriaPrima extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        String sql = "select * from materiaprima order by materiaPrima";
+        String sql = "select * from materiaprima order by nome";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -364,9 +341,9 @@ public class MateriaPrima extends javax.swing.JDialog {
 
             while (resultado.next()) {
                 Object[] linha = new Object[]{
-                    resultado.getInt("cod_MateriaPrima"),
+                    resultado.getInt("id"),
                     resultado.getString("nome"),
-                    resultado.getInt("qtdEstoque"),};
+                    resultado.getInt("qtd"),};
 
                 modelo.addRow(linha);
             }
@@ -386,7 +363,7 @@ public class MateriaPrima extends javax.swing.JDialog {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int id = Integer.parseInt(txtID.getText());
 
-        String sql = "delete materiaprima where cod_MateriaPrima=?";
+        String sql = "delete materiaprima where id=?";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -416,7 +393,7 @@ public class MateriaPrima extends javax.swing.JDialog {
         int id = Integer.parseInt(txtID.getText());
         String nome = txtnome.getText();
 
-        String sql = "update materiaprima set nome=?, qtdEstoque=?,where cod_MateriaPrima=?";
+        String sql = "update materiaprima set nome=?, qtd=?,where id=?";
 
         try {
             Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -463,6 +440,10 @@ public class MateriaPrima extends javax.swing.JDialog {
         txtnome.setText(nome);
         txtqtd.setText(String.valueOf(qtd));
     }//GEN-LAST:event_jTabelaMousePressed
+
+    private void radAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -514,8 +495,8 @@ public class MateriaPrima extends javax.swing.JDialog {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTabela;
     private javax.swing.JTable jTable1;
@@ -523,8 +504,6 @@ public class MateriaPrima extends javax.swing.JDialog {
     private javax.swing.JLabel jlNomeMp;
     private javax.swing.JLabel jlQtd;
     private javax.swing.JScrollPane jspTabela;
-    private javax.swing.JTextField jtfQtd;
-    private javax.swing.JTextField jtfQtd1;
     private javax.swing.JRadioButton radAdmin;
     private javax.swing.JRadioButton radAten;
     private javax.swing.JTextField txtID;

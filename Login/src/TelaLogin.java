@@ -1,10 +1,5 @@
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,10 +19,7 @@ public class TelaLogin extends javax.swing.JFrame {
     public TelaLogin() {
         initComponents();
     }
-String usuario = "root";
-    String senha = "0123";
-    String url = "jdbc:mysql://127.0.0.1:3306/grafica";
-    int cont = 0;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,32 +29,23 @@ String usuario = "root";
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jlLogin = new javax.swing.JLabel();
         jlUsuario = new javax.swing.JLabel();
-        jlSenha = new javax.swing.JLabel();
-        jbLog = new javax.swing.JButton();
         jformatCPF = new javax.swing.JFormattedTextField();
+        jlSenha = new javax.swing.JLabel();
+        jpwdSenha = new javax.swing.JPasswordField();
+        jbLog = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
-        jpwdfSenha = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Login");
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jlLogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jlLogin.setText("  LOGIN");
-
-        jlUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jlUsuario.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlUsuario.setText("Usuário (CPF)");
-
-        jlSenha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jlSenha.setText("Senha");
-
-        jbLog.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jbLog.setText("LOGIN");
-        jbLog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbLogActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jlUsuario);
+        jlUsuario.setBounds(90, 120, 79, 15);
 
         try {
             jformatCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -74,101 +57,57 @@ String usuario = "root";
                 jformatCPFActionPerformed(evt);
             }
         });
+        getContentPane().add(jformatCPF);
+        jformatCPF.setBounds(180, 110, 260, 30);
+
+        jlSenha.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jlSenha.setText("Senha");
+        getContentPane().add(jlSenha);
+        jlSenha.setBounds(90, 170, 36, 15);
+
+        jpwdSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jpwdSenhaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jpwdSenha);
+        jpwdSenha.setBounds(180, 160, 260, 30);
+
+        jbLog.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jbLog.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\Telas\\Fundo_Icones_Login\\Botao_Login.png")); // NOI18N
+        jbLog.setOpaque(false);
+        jbLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLogActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbLog);
+        jbLog.setBounds(180, 210, 100, 50);
 
         jbCancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jbCancelar.setText("Cancelar");
+        jbCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\Telas\\Fundo_Icones_Login\\Cancela_Login.png")); // NOI18N
         jbCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCancelarActionPerformed(evt);
             }
         });
+        getContentPane().add(jbCancelar);
+        jbCancelar.setBounds(340, 210, 100, 50);
 
-        jpwdfSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jpwdfSenhaActionPerformed(evt);
-            }
-        });
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\marqu\\OneDrive\\Documentos\\Fatec\\5º Semestre\\Laboratório de Engenharia_Elaine\\Telas\\Fundo_Icones_Login\\Fundo_Login.png")); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 600, 281);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlSenha)
-                            .addComponent(jlUsuario))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jformatCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                            .addComponent(jpwdfSenha)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jbLog, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(jbCancelar)))
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlUsuario)
-                    .addComponent(jformatCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlSenha)
-                    .addComponent(jpwdfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbLog)
-                    .addComponent(jbCancelar))
-                .addGap(46, 46, 46))
-        );
-
-        pack();
+        setSize(new java.awt.Dimension(616, 319));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jpwdSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpwdSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jpwdSenhaActionPerformed
+
     private void jbLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogActionPerformed
-    //captura os dados digitados;F
-        String cpf = jformatCPF.getText();
-        String pwd = new String (jpwdfSenha.getPassword());
-        String sql = "select * from usuario where cpf=? and senha=?";
-        cpf = cpf.replace( "." , "");
-        cpf = cpf.replace("-","");
-
-        try {
-            Connection conexao = DriverManager.getConnection(url, usuario, senha);
-
-            PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setString(1, cpf);
-            comando.setString(2, pwd);
-            ResultSet resultado = comando.executeQuery();
-            if (!resultado.next()){
-                if (cont > 3){
-                    JOptionPane.showMessageDialog(null,"Usuário ou senha incorreta");
-                }else{
-                JOptionPane.showMessageDialog(null,"Mais de 3 tentativas incorretas, entrar em contato com adminstrador."); 
-                }
-                cont++;    
-            }else {
-            
-            }
-            resultado.close();
-            comando.close();
-            conexao.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Usuário não cadastrado, entrar em contato com administrador.");
-        }        
+        
     }//GEN-LAST:event_jbLogActionPerformed
 
     private void jformatCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jformatCPFActionPerformed
@@ -178,10 +117,6 @@ String usuario = "root";
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbCancelarActionPerformed
-
-    private void jpwdfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpwdfSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jpwdfSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,12 +154,12 @@ String usuario = "root";
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbLog;
     private javax.swing.JFormattedTextField jformatCPF;
-    private javax.swing.JLabel jlLogin;
     private javax.swing.JLabel jlSenha;
     private javax.swing.JLabel jlUsuario;
-    private javax.swing.JPasswordField jpwdfSenha;
+    private javax.swing.JPasswordField jpwdSenha;
     // End of variables declaration//GEN-END:variables
 }
